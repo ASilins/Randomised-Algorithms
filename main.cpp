@@ -1,7 +1,5 @@
 #include <iostream>
-#include <random>
 #include <vector>
-#include "hashing/HashFunction.h"
 #include "hashing/HashingWithChaining.h"
 #include "hashing/PerfectHashing.h"
 #include "hashing/RedBlackSearchTree.h"
@@ -12,7 +10,7 @@ int main()
 {
     constexpr uint8_t w = 20;
     // 2^w
-    constexpr uint32_t m = 1<<w;
+    constexpr uint32_t m = 1ULL<<w;
 
     // setup
     vector<uint32_t> number_list(m);
@@ -52,8 +50,7 @@ int main()
     end = std::chrono::high_resolution_clock::now();
     cout << "Query time taken: " << chrono::duration_cast<chrono::microseconds>(end - start).count() << " microseconds" << endl;
 
-    // hashing_with_chaining.print_table();
-
+    // TODO: Perfect hashing is not working good as it has a long build time but low query time.
     cout << "Perfect hashing:" << endl;
     start = std::chrono::high_resolution_clock::now();
     PerfectHashing perfect_hashing = PerfectHashing(number_list, w);

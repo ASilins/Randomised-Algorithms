@@ -3,10 +3,10 @@
 #include <iostream>
 #include "../utils/NumberUtils.h"
 
-class HashFunction {
+class MultiplyShiftHash {
 public:
-  HashFunction();
-  explicit HashFunction( uint8_t w);
+  MultiplyShiftHash();
+  explicit MultiplyShiftHash( uint8_t w);
   [[nodiscard]] uint32_t hash( uint32_t x) const;
 
 private:

@@ -113,8 +113,8 @@ build libUtils.a: CXX_STATIC_LIBRARY_LINKER__Utils_Debug CMakeFiles/Utils.dir/ut
 
 build cmake_object_order_depends_target_Hashing: phony || .
 
-build CMakeFiles/Hashing.dir/hashing/HashFunction.cpp.o: CXX_COMPILER__Hashing_unscanned_Debug /Users/asilins/Documents/School/AU/Randomised$ Algorithms/Randomised-Algorithms/hashing/HashFunction.cpp || cmake_object_order_depends_target_Hashing
-  DEP_FILE = CMakeFiles/Hashing.dir/hashing/HashFunction.cpp.o.d
+build CMakeFiles/Hashing.dir/hashing/MultiplyShiftHash.cpp.o: CXX_COMPILER__Hashing_unscanned_Debug /Users/asilins/Documents/School/AU/Randomised$ Algorithms/Randomised-Algorithms/hashing/MultiplyShiftHash.cpp || cmake_object_order_depends_target_Hashing
+  DEP_FILE = CMakeFiles/Hashing.dir/hashing/MultiplyShiftHash.cpp.o.d
   FLAGS = -g -std=gnu++2b -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk -mmacosx-version-min=15.0 -fcolor-diagnostics
   OBJECT_DIR = CMakeFiles/Hashing.dir
   OBJECT_FILE_DIR = CMakeFiles/Hashing.dir/hashing
@@ -143,6 +143,12 @@ build CMakeFiles/Hashing.dir/hashing/SecondaryArray.cpp.o: CXX_COMPILER__Hashing
   OBJECT_DIR = CMakeFiles/Hashing.dir
   OBJECT_FILE_DIR = CMakeFiles/Hashing.dir/hashing
 
+build CMakeFiles/Hashing.dir/hashing/MultiplyModPrimeHash.cpp.o: CXX_COMPILER__Hashing_unscanned_Debug /Users/asilins/Documents/School/AU/Randomised$ Algorithms/Randomised-Algorithms/hashing/MultiplyModPrimeHash.cpp || cmake_object_order_depends_target_Hashing
+  DEP_FILE = CMakeFiles/Hashing.dir/hashing/MultiplyModPrimeHash.cpp.o.d
+  FLAGS = -g -std=gnu++2b -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk -mmacosx-version-min=15.0 -fcolor-diagnostics
+  OBJECT_DIR = CMakeFiles/Hashing.dir
+  OBJECT_FILE_DIR = CMakeFiles/Hashing.dir/hashing
+
 
 # =============================================================================
 # Link build statements for STATIC_LIBRARY target Hashing
@@ -151,7 +157,7 @@ build CMakeFiles/Hashing.dir/hashing/SecondaryArray.cpp.o: CXX_COMPILER__Hashing
 #############################################
 # Link the static library libHashing.a
 
-build libHashing.a: CXX_STATIC_LIBRARY_LINKER__Hashing_Debug CMakeFiles/Hashing.dir/hashing/HashFunction.cpp.o CMakeFiles/Hashing.dir/hashing/HashingWithChaining.cpp.o CMakeFiles/Hashing.dir/hashing/RedBlackSearchTree.cpp.o CMakeFiles/Hashing.dir/hashing/PerfectHashing.cpp.o CMakeFiles/Hashing.dir/hashing/SecondaryArray.cpp.o
+build libHashing.a: CXX_STATIC_LIBRARY_LINKER__Hashing_Debug CMakeFiles/Hashing.dir/hashing/MultiplyShiftHash.cpp.o CMakeFiles/Hashing.dir/hashing/HashingWithChaining.cpp.o CMakeFiles/Hashing.dir/hashing/RedBlackSearchTree.cpp.o CMakeFiles/Hashing.dir/hashing/PerfectHashing.cpp.o CMakeFiles/Hashing.dir/hashing/SecondaryArray.cpp.o CMakeFiles/Hashing.dir/hashing/MultiplyModPrimeHash.cpp.o
   ARCH_FLAGS = -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk -mmacosx-version-min=15.0
   LANGUAGE_COMPILE_FLAGS = -g
   OBJECT_DIR = CMakeFiles/Hashing.dir

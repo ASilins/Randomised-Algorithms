@@ -2,7 +2,7 @@
 #define HASHINGWITHCHAINING_H
 
 #include <iostream>
-#include "HashFunction.h"
+#include "MultiplyShiftHash.h"
 
 class HashingWithChaining {
 public:
@@ -13,7 +13,7 @@ public:
 
 private:
     std::vector<std::vector<uint32_t>> table;
-    HashFunction h;
+    MultiplyShiftHash h;
 };
 
 #endif //HASHINGWITHCHAINING_H

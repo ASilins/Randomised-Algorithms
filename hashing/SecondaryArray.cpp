@@ -1,7 +1,8 @@
 #include "SecondaryArray.h"
 
-SecondaryArray::SecondaryArray() : h(HashFunction()) {
-    bucket.resize(1);
+#include <iostream>
+
+SecondaryArray::SecondaryArray() : h(MultiplyModPrimeHash()) {
 }
 
 void SecondaryArray::insert(const uint32_t x) {
@@ -43,15 +44,15 @@ uint32_t SecondaryArray::collisions() const {
  *
  * @return true if there was a collision
  */
+// TODO: Getting to many rehashes. Perhaps the hash function is not good or something else is not working.
 bool SecondaryArray::rehash() {
-    auto q = bucket.size();
-    std::vector<uint32_t> newBucket(q);
-    h = HashFunction(q);
-    for (int i = 0; i < q; ++i) {
+    auto q = bucket.size() * bucket.size();
+    std::vector<uint32_t> newBucket(q, 0);
+    h = MultiplyModPrimeHash(q);
+    for (int i = 0; i < bucket.size(); ++i) {
         auto index = h.hash(bucket[i]);
         // if there is a collision then we need to rehash
         if (newBucket[index] != 0) {
-            std::cout << "Collision in secondary array! Rehashing" << std::endl;
             return true;
         }
         newBucket[index] = bucket[i];

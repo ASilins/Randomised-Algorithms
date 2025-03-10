@@ -1,6 +1,6 @@
 #ifndef PERFECTHASHING_H
 #define PERFECTHASHING_H
-#include "HashFunction.h"
+#include "MultiplyShiftHash.h"
 #include "SecondaryArray.h"
 
 
@@ -20,7 +20,7 @@ private:
     uint8_t rehashes;
     uint64_t secondaryRehashes;
     std::vector<SecondaryArray> table;
-    HashFunction h;
+    MultiplyShiftHash h;
 
 };
 

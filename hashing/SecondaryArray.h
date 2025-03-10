@@ -1,10 +1,14 @@
 #ifndef SECONDARYARRAY_H
 #define SECONDARYARRAY_H
-#include "HashFunction.h"
+#include <vector>
 
+
+#include "MultiplyModPrimeHash.h"
 
 class SecondaryArray {
 public:
+    std::vector<uint32_t> bucket;
+
     explicit SecondaryArray();
     void insert(uint32_t x);
     bool query(uint32_t x) const;
@@ -14,10 +18,7 @@ public:
 private:
     bool rehash();
 
-    HashFunction h;
-    std::vector<uint32_t> bucket;
+    MultiplyModPrimeHash h;
 };
-
-
 
 #endif //SECONDARYARRAY_H

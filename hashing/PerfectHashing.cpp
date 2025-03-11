@@ -18,6 +18,14 @@ bool PerfectHashing::query(const uint32_t x) const {
     return table[index].query(x);
 }
 
+void PerfectHashing::printTable() const {
+    for (int i = 0; i < table.size(); ++i) {
+        std::cout << "Index: " << i;
+        table[i].printTable();
+        std::cout << std::endl;
+    }
+}
+
 
 void PerfectHashing::insert(uint32_t x) {
     std::cout << "Inserting " << h.hash(x) << std::endl;
@@ -39,7 +47,6 @@ void PerfectHashing::build(std::vector<uint32_t> &list) {
         if (table[i].bucket.size() <= 1) continue;
         secondaryRehashes += table[i].build();
     }
-    std::cout << "Secondary rehashes: " << secondaryRehashes << std::endl;
 }
 
 bool PerfectHashing::rehash(std::vector<uint32_t> &list) {

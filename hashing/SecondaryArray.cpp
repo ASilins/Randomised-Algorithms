@@ -36,6 +36,11 @@ uint32_t SecondaryArray::collisions() const {
     return (n * n - n) / 2;
 }
 
+void SecondaryArray::printTable() const {
+    for (int i = 0; i < bucket.size(); ++i) {
+        std::cout << " " << bucket[i];
+    }
+}
 
 /**
  * Rehash the secondary array by creating new hash function, new bucket, iterating over the bucket and
@@ -60,4 +65,3 @@ bool SecondaryArray::rehash() {
     bucket = newBucket;
     return false;
 }
-

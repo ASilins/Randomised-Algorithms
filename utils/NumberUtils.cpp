@@ -16,11 +16,16 @@ uint64_t NumberUtils::generate_random_uint(const uint64_t m) {
     return dist(gen);
 }
 
- // Could be improved
 std::vector<uint32_t> NumberUtils::generate_shuffled_list(uint32_t size) {
     std::vector<uint32_t> list(size);
-    for (uint64_t i = 0; i < size; ++i) {
-        list[i] = static_cast<uint32_t>((i*i)%size);
+    std::vector used(UINT32_MAX, false);
+    uint64_t count = 0;
+    for (uint64_t i = 0; count < size; ++i) {
+        uint32_t key = generate_random_uint(UINT32_MAX);
+        if (!used[key]) {
+            list[count++] = key;
+            used[key] = true;
+        }
     }
     std::random_device rd;
     std::mt19937 gen(rd());

@@ -1,9 +1,14 @@
 #include "HashingWithChaining.h"
 
-HashingWithChaining::HashingWithChaining(const uint32_t m, const uint8_t w) : h(MultiplyShiftHash(w)) {
+HashingWithChaining::HashingWithChaining(const uint32_t m, const uint8_t w, const std::vector<uint32_t> &list)
+: h(MultiplyShiftHash(w))
+{
     table.resize(m);
     for (std::vector<uint32_t>& chain : table) {
-        chain.reserve(10);
+        chain.reserve(5);
+    }
+    for (const uint32_t &x: list) {
+        insert(x);
     }
 }
 

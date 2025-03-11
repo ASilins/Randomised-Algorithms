@@ -4,7 +4,9 @@ project(Randomised_Algorithms)
 set(CMAKE_CXX_STANDARD 23)
 
 add_executable(Randomised_Algorithms main.cpp)
-add_library(Utils utils/NumberUtils.cpp)
+add_library(Utils utils/NumberUtils.cpp
+        utils/CSVWriter.cpp
+        utils/CSVWriter.h)
 add_library(Hashing hashing/MultiplyShiftHash.cpp
         hashing/MultiplyShiftHash.h
         hashing/HashingWithChaining.cpp

@@ -1,4 +1,23 @@
-/Users/asilins/Applications/CLion.app/Contents/bin/cmake/mac/aarch64/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=/Users/asilins/Applications/CLion.app/Contents/bin/ninja/mac/aarch64/ninja -G Ninja -S "/Users/asilins/Documents/School/AU/Randomised Algorithms/Randomised-Algorithms" -B "/Users/asilins/Documents/School/AU/Randomised Algorithms/Randomised-Algorithms/cmake-build-debug"
--- Configuring done (0.0s)
+/Users/asilins/Applications/CLion.app/Contents/bin/cmake/mac/aarch64/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=/Users/asilins/Applications/CLion.app/Contents/bin/ninja/mac/aarch64/ninja -G Ninja -DPython_EXECUTABLE=/usr/local/bin/python3.12 -DPython3_EXECUTABLE=/usr/local/bin/python3.12 -S "/Users/asilins/Documents/School/AU/Randomised Algorithms/Randomised-Algorithms" -B "/Users/asilins/Documents/School/AU/Randomised Algorithms/Randomised-Algorithms/cmake-build-debug"
+-- The C compiler identification is AppleClang 16.0.0.16000026
+-- The CXX compiler identification is AppleClang 16.0.0.16000026
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Configuring done (0.8s)
 -- Generating done (0.0s)
+CMake Warning:
+  Manually-specified variables were not used by the project:
+
+    Python3_EXECUTABLE
+    Python_EXECUTABLE
+
+
 -- Build files have been written to: /Users/asilins/Documents/School/AU/Randomised Algorithms/Randomised-Algorithms/cmake-build-debug

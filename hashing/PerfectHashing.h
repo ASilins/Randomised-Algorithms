@@ -10,6 +10,7 @@ public:
     bool query(uint32_t x) const;
     uint8_t getRehashes() const { return rehashes; }
     uint64_t getSecondaryRehashes() const { return secondaryRehashes; }
+    void printTable() const;
 private:
     void insert(uint32_t x);
     void build(std::vector<uint32_t> &list);

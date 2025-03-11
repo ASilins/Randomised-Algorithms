@@ -14,6 +14,7 @@ public:
     bool query(uint32_t x) const;
     uint8_t build();
     uint32_t collisions() const;
+    void printTable() const;
 
 private:
     bool rehash();

@@ -33,4 +33,15 @@ void HashingWithChaining::print_table() const {
     }
 }
 
+uint32_t HashingWithChaining::largest_linked_list() const {
+    uint32_t largest = 0;
+    for (int i = 0; i < table.size(); ++i) {
+        if (table[i].size() > largest) {
+            largest = table[i].size();
+        }
+    }
+    return largest;
+}
+
+
 

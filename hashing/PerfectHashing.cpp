@@ -18,7 +18,7 @@ bool PerfectHashing::query(const uint32_t x) const {
     return table[index].query(x);
 }
 
-void PerfectHashing::printTable() const {
+void PerfectHashing::print_table() const {
     for (int i = 0; i < table.size(); ++i) {
         std::cout << "Index: " << i;
         table[i].printTable();

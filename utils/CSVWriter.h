@@ -5,8 +5,8 @@
 
 class CSVWriter {
 public:
-    explicit CSVWriter(const std::string &file);
-    void appendResult(const std::string &algorithm, uint32_t n, u_int64_t buildTime, u_int64_t queryTime) const;
+    explicit CSVWriter(const std::string &file, const std::string &header);
+    void appendResult(const std::string &text) const;
 private:
     std::string filename;
 };

@@ -8,9 +8,9 @@ class PerfectHashing {
 public:
     explicit PerfectHashing(std::vector<uint32_t> &list, uint8_t w);
     bool query(uint32_t x) const;
-    uint8_t getRehashes() const { return rehashes; }
-    uint64_t getSecondaryRehashes() const { return secondaryRehashes; }
-    void printTable() const;
+    uint8_t get_rehashes() const { return rehashes; }
+    uint64_t get_secondary_rehashes() const { return secondaryRehashes; }
+    void print_table() const;
 private:
     void insert(uint32_t x);
     void build(std::vector<uint32_t> &list);

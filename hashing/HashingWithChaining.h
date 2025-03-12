@@ -9,6 +9,7 @@ public:
     explicit HashingWithChaining(uint32_t m, uint8_t w, const std::vector<uint32_t> &list);
     bool query(uint32_t x);
     void print_table() const;
+    uint32_t largest_linked_list() const;
 
 private:
     void insert(uint32_t x);

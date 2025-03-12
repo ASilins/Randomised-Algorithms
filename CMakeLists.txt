@@ -19,5 +19,6 @@ add_library(Hashing hashing/MultiplyShiftHash.cpp
         hashing/SecondaryArray.h
         hashing/MultiplyModPrimeHash.cpp
         hashing/MultiplyModPrimeHash.h)
+add_library(Experiments experiments/ProjectOne.cpp experiments/ProjectOne.h)
 
-target_link_libraries(Randomised_Algorithms Utils Hashing)
+target_link_libraries(Randomised_Algorithms Utils Hashing Experiments)

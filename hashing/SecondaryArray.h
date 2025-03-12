@@ -7,11 +7,11 @@
 
 class SecondaryArray {
 public:
-    std::vector<uint32_t> bucket;
+    std::vector<uint64_t> bucket;
 
     explicit SecondaryArray();
-    void insert(uint32_t x);
-    bool query(uint32_t x) const;
+    void insert(uint64_t x);
+    bool query(uint64_t x) const;
     uint8_t build();
     uint32_t collisions() const;
     void printTable() const;

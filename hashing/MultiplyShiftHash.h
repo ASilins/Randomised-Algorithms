@@ -7,7 +7,7 @@ class MultiplyShiftHash {
 public:
   MultiplyShiftHash();
   explicit MultiplyShiftHash(uint8_t w);
-  [[nodiscard]] uint32_t hash(uint32_t x) const;
+  [[nodiscard]] uint32_t hash(uint64_t x) const;
 
 private:
   uint64_t a;

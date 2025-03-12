@@ -3,7 +3,7 @@ import os
 import pandas as pd
 import matplotlib.pyplot as plt
 
-run = "./run_x/"
+run = "./run_4/"
 os.makedirs(run, exist_ok=True)
 
 # Analysis for build and query time

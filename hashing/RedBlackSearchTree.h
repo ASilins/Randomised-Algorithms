@@ -7,11 +7,11 @@
 
 class RedBlackSearchTree {
 public:
-    explicit RedBlackSearchTree(const std::vector<uint32_t> &list);
-    void insert(uint32_t x);
-    bool query(uint32_t x) const;
+    explicit RedBlackSearchTree(const std::vector<uint64_t> &list);
+    void insert(uint64_t x);
+    bool query(uint64_t x) const;
 private:
-    std::set<uint32_t> table;
+    std::set<uint64_t> table;
 };
 
 #endif //REDBLACKSEARCHTREE_H

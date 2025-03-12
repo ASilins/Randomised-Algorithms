@@ -11,6 +11,6 @@ MultiplyShiftHash::MultiplyShiftHash(const uint8_t w) : w(w) {
     } while (a % 2 == 0);
 }
 
-uint32_t MultiplyShiftHash::hash(const uint32_t x) const {
+uint32_t MultiplyShiftHash::hash(const uint64_t x) const {
     return static_cast<uint32_t>((a*x) >> (64-w));
 }

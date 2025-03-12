@@ -7,7 +7,7 @@ class MultiplyModPrimeHash {
 public:
     MultiplyModPrimeHash();
     explicit MultiplyModPrimeHash(uint32_t m);
-    [[nodiscard]] uint32_t hash(uint32_t x) const;
+    [[nodiscard]] uint32_t hash(uint64_t x) const;
 private:
     uint32_t m;
     uint64_t a, b, prime;

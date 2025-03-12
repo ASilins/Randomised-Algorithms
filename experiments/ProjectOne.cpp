@@ -12,7 +12,7 @@ void ProjectOne::runExperiments() {
 
     std::cout << "Starting experiment one!" << std::endl;
     std::chrono::time_point<std::chrono::steady_clock> start = std::chrono::high_resolution_clock::now();
-    for (uint8_t i = 10; i <= 25; ++i)
+    for (uint8_t i = 10; i <= 22; ++i)
     {
         std::cout << "Running for 2^" << static_cast<int>(i) << ":" << std::endl;
         const uint32_t m = 1ULL<<i;
@@ -20,7 +20,7 @@ void ProjectOne::runExperiments() {
         {
             std::cout << "Executing iteration " << static_cast<int>(j) + 1 << std::endl;
             std::chrono::time_point<std::chrono::steady_clock> buildStart = std::chrono::high_resolution_clock::now();
-            std::vector<uint32_t> number_list = NumberUtils::generate_shuffled_list(m);
+            std::vector<uint64_t> number_list = NumberUtils::generate_shuffled_list(m);
             std::chrono::time_point<std::chrono::steady_clock> buildEnd = std::chrono::high_resolution_clock::now();
             std::cout << "List build time: " << std::chrono::duration_cast<std::chrono::milliseconds>(buildEnd - buildStart).count() << " ms" << std::endl;
 
@@ -34,7 +34,7 @@ void ProjectOne::runExperiments() {
     std::cout << "Experiment runtime: " << std::chrono::duration_cast<std::chrono::minutes>(end - start).count() << " m" << std::endl;
 }
 
-void ProjectOne::runChainingExperiment(const CSVWriter &writer, const CSVWriter &listWriter, const std::vector<uint32_t> &list,
+void ProjectOne::runChainingExperiment(const CSVWriter &writer, const CSVWriter &listWriter, const std::vector<uint64_t> &list,
     const uint8_t &w, const uint32_t &m)
 {
     // build time
@@ -58,7 +58,7 @@ void ProjectOne::runChainingExperiment(const CSVWriter &writer, const CSVWriter 
     listWriter.appendResult(listResult);
 }
 
-void ProjectOne::runRedBlackExperiment(const CSVWriter &writer, const std::vector<uint32_t> &list,  const uint32_t &m)
+void ProjectOne::runRedBlackExperiment(const CSVWriter &writer, const std::vector<uint64_t> &list,  const uint32_t &m)
 {
     // build time
     std::chrono::time_point<std::chrono::steady_clock> start = std::chrono::high_resolution_clock::now();
@@ -79,7 +79,7 @@ void ProjectOne::runRedBlackExperiment(const CSVWriter &writer, const std::vecto
     writer.appendResult(timeResult);
 }
 
-void ProjectOne::runPerfectHashingExperiment(const CSVWriter &writer, const CSVWriter &rehashesWriter, std::vector<uint32_t> &list, const uint8_t &w, const uint32_t &m)
+void ProjectOne::runPerfectHashingExperiment(const CSVWriter &writer, const CSVWriter &rehashesWriter, std::vector<uint64_t> &list, const uint8_t &w, const uint32_t &m)
 {
     // build time
     std::chrono::time_point<std::chrono::steady_clock> start = std::chrono::high_resolution_clock::now();

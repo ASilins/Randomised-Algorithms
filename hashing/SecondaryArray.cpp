@@ -5,11 +5,11 @@
 SecondaryArray::SecondaryArray() : h(MultiplyModPrimeHash()) {
 }
 
-void SecondaryArray::insert(const uint32_t x) {
+void SecondaryArray::insert(const uint64_t x) {
     bucket.push_back(x);
 }
 
-bool SecondaryArray::query(const uint32_t x) const {
+bool SecondaryArray::query(const uint64_t x) const {
     auto index = h.hash(x);
     if (index >= bucket.size()) return false;
     return bucket[index] == x;
@@ -52,7 +52,7 @@ void SecondaryArray::printTable() const {
 // TODO: Getting to many rehashes. Perhaps the hash function is not good or something else is not working.
 bool SecondaryArray::rehash() {
     auto q = bucket.size() * bucket.size();
-    std::vector<uint32_t> newBucket(q, 0);
+    std::vector<uint64_t> newBucket(q, 0);
     h = MultiplyModPrimeHash(q);
     for (int i = 0; i < bucket.size(); ++i) {
         auto index = h.hash(bucket[i]);

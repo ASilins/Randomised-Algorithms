@@ -1,6 +1,6 @@
 #include "PerfectHashing.h"
 
-PerfectHashing::PerfectHashing(std::vector<uint32_t> &list, const uint8_t w) :
+PerfectHashing::PerfectHashing(std::vector<uint64_t> &list, const uint8_t w) :
 n(list.size()),
 w(w),
 rehashes(0),
@@ -26,12 +26,12 @@ void PerfectHashing::print_table() const {
     }
 }
 
-void PerfectHashing::insert(uint32_t x) {
+void PerfectHashing::insert(uint64_t x) {
     std::cout << "Inserting " << h.hash(x) << std::endl;
     table[h.hash(x)].insert(x);
 }
 
-void PerfectHashing::build(std::vector<uint32_t> &list) {
+void PerfectHashing::build(std::vector<uint64_t> &list) {
     bool rehashNeeded = true;
     while (rehashNeeded) {
         rehashNeeded = rehash(list);
@@ -41,21 +41,25 @@ void PerfectHashing::build(std::vector<uint32_t> &list) {
         }
     }
 
-    // TODO: This seems to be the bottleneck. It takes a long time to hash the secondary arrays with multiple collisions.
+    auto counter = 0;
     for (int i = 0; i < table.size(); ++i) {
         if (table[i].bucket.size() <= 1) continue;
-        secondaryRehashes += table[i].build();
+
+        auto temp = table[i].build();
+
+        if (temp > 0)
+        {
+            secondaryRehashes += temp;
+            counter++;
+        }
     }
+    secondaryRehashes = secondaryRehashes/counter;
 }
 
-bool PerfectHashing::rehash(std::vector<uint32_t> &list) {
+bool PerfectHashing::rehash(std::vector<uint64_t> &list) {
     auto collisions = 0;
     for (int i = 0; i < list.size(); ++i) {
         const auto index = h.hash(list[i]);
-        if (index >= table.size()) {
-            std::cerr << "Hash index out of bounds: " << index << std::endl;
-            return true; // Trigger a rehash if the index is out of bounds
-        }
         // We want to remove the collision count in that bucket from the total collisions so that it can change
         // correctly after inserting the new element in the bucket.
         auto& bucket = table[index];

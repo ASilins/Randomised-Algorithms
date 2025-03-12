@@ -13,7 +13,7 @@ MultiplyModPrimeHash::MultiplyModPrimeHash(uint32_t m) : m(m) {
     b = NumberUtils::generate_random_uint(prime-1);
 }
 
-uint32_t MultiplyModPrimeHash::hash(uint32_t x) const {
+uint32_t MultiplyModPrimeHash::hash(uint64_t x) const {
     __uint128_t result = static_cast<__uint128_t>(a) * x + b;
     result = (result & prime) + (result >> 61);
     if (result >= prime) result -= prime;

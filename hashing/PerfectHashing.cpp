@@ -26,7 +26,6 @@ void PerfectHashing::print_table() const {
     }
 }
 
-
 void PerfectHashing::insert(uint32_t x) {
     std::cout << "Inserting " << h.hash(x) << std::endl;
     table[h.hash(x)].insert(x);

@@ -6,11 +6,11 @@
 class MultiplyShiftHash {
 public:
   MultiplyShiftHash();
-  explicit MultiplyShiftHash( uint8_t w);
-  [[nodiscard]] uint32_t hash( uint32_t x) const;
+  explicit MultiplyShiftHash(uint8_t w);
+  [[nodiscard]] uint32_t hash(uint32_t x) const;
 
 private:
-  uint64_t a, b;
+  uint64_t a;
   uint8_t w;
 };
 

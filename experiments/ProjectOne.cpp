@@ -28,6 +28,7 @@ void ProjectOne::runExperiments() {
             runChainingExperiment(timeWriter, linkedListWriter, number_list, i, m);
             runPerfectHashingExperiment(timeWriter, rehashesWriter, number_list, i, m);
         }
+        std::cout << std::endl;
     }
     std::chrono::time_point<std::chrono::steady_clock> end = std::chrono::high_resolution_clock::now();
     std::cout << "Experiment runtime: " << std::chrono::duration_cast<std::chrono::minutes>(end - start).count() << " m" << std::endl;

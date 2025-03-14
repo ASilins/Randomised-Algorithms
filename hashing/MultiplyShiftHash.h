@@ -5,13 +5,14 @@
 
 class MultiplyShiftHash {
 public:
-  MultiplyShiftHash();
-  explicit MultiplyShiftHash(uint8_t w);
-  [[nodiscard]] uint32_t hash(uint64_t x) const;
+    MultiplyShiftHash();
+    explicit MultiplyShiftHash(uint8_t w);
+    uint32_t hash(uint64_t x) const;
+    void scramble();
 
 private:
-  uint64_t a;
-  uint8_t w;
+    uint64_t a;
+    uint8_t w;
 };
 
 

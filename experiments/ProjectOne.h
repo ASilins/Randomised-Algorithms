@@ -7,14 +7,14 @@
 
 class ProjectOne {
 public:
-    static void runExperiments();
+    static void run_experiments();
 private:
-    static void runChainingExperiment(const CSVWriter &writer, const CSVWriter &listWriter, const std::vector<uint64_t> &list,
+    static void run_chaining_experiment(const CSVWriter &writer, const CSVWriter &list_writer, const std::vector<uint64_t> &list,
         const std::uint8_t &w, const std::uint32_t &m);
 
-    static void runRedBlackExperiment(const CSVWriter &writer, const std::vector<uint64_t> &list,  const uint32_t &m);
+    static void run_red_black_experiment(const CSVWriter &writer, const std::vector<uint64_t> &list,  const uint32_t &m);
 
-    static void runPerfectHashingExperiment(const CSVWriter &writer, const CSVWriter &rehashesWriter, std::vector<uint64_t> &list,
+    static void run_perfect_hashing_experiment(const CSVWriter &writer, const CSVWriter &rehashes_writer, std::vector<uint64_t> &list,
         const uint8_t &w, const uint32_t &m);
 };
 

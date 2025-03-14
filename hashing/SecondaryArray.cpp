@@ -11,8 +11,11 @@ void SecondaryArray::insert(const uint64_t x) {
 
 bool SecondaryArray::query(const uint64_t x) const {
     auto index = h.hash(x);
-    if (index >= bucket.size()) return false;
-    return bucket[index] == x;
+    auto result = bucket[index] == x;
+    if (!result) {
+        std::cout << "Entry could not be found: " << x << " at index: " << index << std::endl;
+    }
+    return result;
 }
 
 /**
@@ -22,6 +25,10 @@ bool SecondaryArray::query(const uint64_t x) const {
  */
 uint8_t SecondaryArray::build() {
     uint8_t rehash_count = 0;
+    if (bucket.size() <= 1) {
+        h.scramble(bucket.size());
+        return 0;
+    }
     bool rehash_needed = true;
     while (rehash_needed) {
         rehash_needed = rehash();
@@ -37,7 +44,7 @@ uint32_t SecondaryArray::collisions() const {
 }
 
 void SecondaryArray::printTable() const {
-    for (int i = 0; i < bucket.size(); ++i) {
+    for (uint64_t i = 0; i < bucket.size(); ++i) {
         std::cout << " " << bucket[i];
     }
 }
@@ -49,12 +56,11 @@ void SecondaryArray::printTable() const {
  *
  * @return true if there was a collision
  */
-// TODO: Getting to many rehashes. Perhaps the hash function is not good or something else is not working.
 bool SecondaryArray::rehash() {
     auto q = bucket.size() * bucket.size();
     std::vector<uint64_t> newBucket(q, 0);
-    h = MultiplyModPrimeHash(q);
-    for (int i = 0; i < bucket.size(); ++i) {
+    this->h.scramble(q);
+    for (uint64_t i = 0; i < bucket.size(); ++i) {
         auto index = h.hash(bucket[i]);
         // if there is a collision then we need to rehash
         if (newBucket[index] != 0) {

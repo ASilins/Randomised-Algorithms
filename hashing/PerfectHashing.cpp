@@ -4,7 +4,9 @@ PerfectHashing::PerfectHashing(std::vector<uint64_t> &list, const uint8_t w) :
 n(list.size()),
 w(w),
 rehashes(0),
-secondaryRehashes(0),
+secondary_rehashes(0),
+collisions(0),
+buckets_hashed(0),
 // If we set c = 1, then we can set the table size to be 2*n and the hash function is just w + 1 as n = 2^w.
 table(std::vector<SecondaryArray>(2*n)),
 h(MultiplyShiftHash(w+1))
@@ -12,7 +14,7 @@ h(MultiplyShiftHash(w+1))
     build(list);
 }
 
-bool PerfectHashing::query(const uint32_t x) const {
+bool PerfectHashing::query(const uint64_t x) const {
     auto index = h.hash(x);
     if (index >= table.size()) return false;
     return table[index].query(x);
@@ -37,41 +39,35 @@ void PerfectHashing::build(std::vector<uint64_t> &list) {
         rehashNeeded = rehash(list);
         ++rehashes;
         if (rehashNeeded) {
-            h = MultiplyShiftHash(w+1);
+            this->h.scramble();
         }
     }
 
-    auto counter = 0;
-    for (int i = 0; i < table.size(); ++i) {
-        if (table[i].bucket.size() <= 1) continue;
-
-        auto temp = table[i].build();
-
-        if (temp > 0)
-        {
-            secondaryRehashes += temp;
-            counter++;
+    for (uint64_t i = 0; i < table.size(); ++i) {
+        auto hash_count = table[i].build();
+        if (hash_count > 0) {
+            secondary_rehashes += hash_count;
+            buckets_hashed++;
         }
     }
-    secondaryRehashes = secondaryRehashes/counter;
 }
 
 bool PerfectHashing::rehash(std::vector<uint64_t> &list) {
-    auto collisions = 0;
-    for (int i = 0; i < list.size(); ++i) {
+    for (uint64_t i = 0; i < list.size(); ++i) {
         const auto index = h.hash(list[i]);
         // We want to remove the collision count in that bucket from the total collisions so that it can change
         // correctly after inserting the new element in the bucket.
         auto& bucket = table[index];
-        collisions -= bucket.collisions();
+        this->collisions -= bucket.collisions();
         bucket.insert(list[i]);
-        collisions += bucket.collisions();
+        this->collisions += bucket.collisions();
         // if there are more than n/2 collisions then we need to rehash
-        if (collisions > n / 2) {
-            std::cout << collisions << std::endl;
+        if (this->collisions > n / 2) {
+            std::cout << this->collisions << std::endl;
             std::cout << "Too many collisions! Rehashing main array" << std::endl;
             // resetting the table as we do not need the inner arrays anymore
             table = std::vector<SecondaryArray>(2*n);
+            this->collisions = 0;
             return true;
         }
     }

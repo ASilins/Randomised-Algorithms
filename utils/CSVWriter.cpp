@@ -10,7 +10,7 @@ CSVWriter::CSVWriter(const std::string &file, const std::string &header) : filen
     }
 }
 
-void CSVWriter::appendResult(const std::string &text) const {
+void CSVWriter::append_result(const std::string &text) const {
     std::ofstream file(filename, std::ios::app);
     if (file.is_open()) {
         file << text;

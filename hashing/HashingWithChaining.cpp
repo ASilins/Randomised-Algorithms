@@ -7,7 +7,7 @@ HashingWithChaining::HashingWithChaining(const uint32_t m, const uint8_t w, cons
     for (std::vector<uint64_t>& chain : table) {
         chain.reserve(5);
     }
-    for (const uint32_t &x: list) {
+    for (const uint64_t &x: list) {
         insert(x);
     }
 }
@@ -20,7 +20,11 @@ bool HashingWithChaining::query(const uint64_t x) {
     const uint32_t index = h.hash(x);
     if (index >= table.size()) return false;
     std::vector<uint64_t> &chain = table[index];
-    return std::ranges::find(chain, x) != chain.end();
+    auto result = std::ranges::find(chain, x) != chain.end();
+    if (!result) {
+        std::cout << "Entry could not be found: " << x << " at index: " << index << std::endl;
+    }
+    return result;
 }
 
 void HashingWithChaining::print_table() const {

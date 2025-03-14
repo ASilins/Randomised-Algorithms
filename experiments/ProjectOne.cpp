@@ -5,43 +5,43 @@
 #include "../hashing/RedBlackSearchTree.h"
 #include "../hashing/PerfectHashing.h"
 
-void ProjectOne::runExperiments() {
-    CSVWriter timeWriter("../analysis/results.csv", "algorithm,n,build,query");
-    CSVWriter linkedListWriter("../analysis/linked_list.csv", "n,count");
-    CSVWriter rehashesWriter("../analysis/rehashes.csv", "n,hashes,secondary_rehashes");
+void ProjectOne::run_experiments() {
+    CSVWriter time_writer("../analysis/results.csv", "algorithm,n,build,query");
+    CSVWriter linked_list_writer("../analysis/linked_list.csv", "n,count");
+    CSVWriter rehashes_writer("../analysis/rehashes.csv", "n,hashes,secondary_rehashes");
 
     std::cout << "Starting experiment one!" << std::endl;
-    std::chrono::time_point<std::chrono::steady_clock> start = std::chrono::high_resolution_clock::now();
-    for (uint8_t i = 10; i <= 22; ++i)
+    auto start = std::chrono::high_resolution_clock::now();
+    for (uint8_t i = 5; i <= 24; ++i)
     {
         std::cout << "Running for 2^" << static_cast<int>(i) << ":" << std::endl;
         const uint32_t m = 1ULL<<i;
         for (uint8_t j = 0; j < 5; ++j)
         {
             std::cout << "Executing iteration " << static_cast<int>(j) + 1 << std::endl;
-            std::chrono::time_point<std::chrono::steady_clock> buildStart = std::chrono::high_resolution_clock::now();
+            auto build_start = std::chrono::high_resolution_clock::now();
             std::vector<uint64_t> number_list = NumberUtils::generate_shuffled_list(m);
-            std::chrono::time_point<std::chrono::steady_clock> buildEnd = std::chrono::high_resolution_clock::now();
-            std::cout << "List build time: " << std::chrono::duration_cast<std::chrono::milliseconds>(buildEnd - buildStart).count() << " ms" << std::endl;
+            auto build_end = std::chrono::high_resolution_clock::now();
+            std::cout << "List build time: " << std::chrono::duration_cast<std::chrono::microseconds>(build_end - build_start).count() << " ms" << std::endl;
 
-            runRedBlackExperiment(timeWriter, number_list, m);
-            runChainingExperiment(timeWriter, linkedListWriter, number_list, i, m);
-            runPerfectHashingExperiment(timeWriter, rehashesWriter, number_list, i, m);
+            run_red_black_experiment(time_writer, number_list, m);
+            run_chaining_experiment(time_writer, linked_list_writer, number_list, i, m);
+            run_perfect_hashing_experiment(time_writer, rehashes_writer, number_list, i, m);
         }
         std::cout << std::endl;
     }
-    std::chrono::time_point<std::chrono::steady_clock> end = std::chrono::high_resolution_clock::now();
+    auto end = std::chrono::high_resolution_clock::now();
     std::cout << "Experiment runtime: " << std::chrono::duration_cast<std::chrono::minutes>(end - start).count() << " m" << std::endl;
 }
 
-void ProjectOne::runChainingExperiment(const CSVWriter &writer, const CSVWriter &listWriter, const std::vector<uint64_t> &list,
+void ProjectOne::run_chaining_experiment(const CSVWriter &writer, const CSVWriter &list_writer, const std::vector<uint64_t> &list,
     const uint8_t &w, const uint32_t &m)
 {
     // build time
-    std::chrono::time_point<std::chrono::steady_clock> start = std::chrono::high_resolution_clock::now();
+    auto start = std::chrono::high_resolution_clock::now();
     HashingWithChaining hashing_with_chaining = HashingWithChaining(m, w, list);
-    std::chrono::time_point<std::chrono::steady_clock> end = std::chrono::high_resolution_clock::now();
-    auto buildTime = std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
+    auto end = std::chrono::high_resolution_clock::now();
+    auto build_time = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
 
     // query time
     start = std::chrono::high_resolution_clock::now();
@@ -49,22 +49,22 @@ void ProjectOne::runChainingExperiment(const CSVWriter &writer, const CSVWriter 
         hashing_with_chaining.query(list.at(i));
     }
     end = std::chrono::high_resolution_clock::now();
-    auto queryTime = std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
+    auto query_time = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
 
     // results
-    std::string timeResult = "HashingWithChaining" "," + std::to_string(m) + "," + std::to_string(buildTime) + "," + std::to_string(queryTime) + "\n";
-    std::string listResult = std::to_string(m) + "," + std::to_string(hashing_with_chaining.largest_linked_list()) + "\n";
-    writer.appendResult(timeResult);
-    listWriter.appendResult(listResult);
+    std::string time_result = "HashingWithChaining" "," + std::to_string(m) + "," + std::to_string(build_time) + "," + std::to_string(query_time) + "\n";
+    std::string list_result = std::to_string(m) + "," + std::to_string(hashing_with_chaining.largest_linked_list()) + "\n";
+    writer.append_result(time_result);
+    list_writer.append_result(list_result);
 }
 
-void ProjectOne::runRedBlackExperiment(const CSVWriter &writer, const std::vector<uint64_t> &list,  const uint32_t &m)
+void ProjectOne::run_red_black_experiment(const CSVWriter &writer, const std::vector<uint64_t> &list,  const uint32_t &m)
 {
     // build time
-    std::chrono::time_point<std::chrono::steady_clock> start = std::chrono::high_resolution_clock::now();
+    auto start = std::chrono::high_resolution_clock::now();
     RedBlackSearchTree red_black_search_tree = RedBlackSearchTree(list);
-    std::chrono::time_point<std::chrono::steady_clock> end = std::chrono::high_resolution_clock::now();
-    auto buildTime = std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
+    auto end = std::chrono::high_resolution_clock::now();
+    auto build_time = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
 
     // query time
     start = std::chrono::high_resolution_clock::now();
@@ -72,20 +72,20 @@ void ProjectOne::runRedBlackExperiment(const CSVWriter &writer, const std::vecto
         red_black_search_tree.query(list.at(i));
     }
     end = std::chrono::high_resolution_clock::now();
-    auto queryTime = std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
+    auto query_time = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
 
     // results
-    std::string timeResult = "RedBlackSearchTree" "," + std::to_string(m) + "," + std::to_string(buildTime) + "," + std::to_string(queryTime) + "\n";
-    writer.appendResult(timeResult);
+    std::string time_result = "RedBlackSearchTree" "," + std::to_string(m) + "," + std::to_string(build_time) + "," + std::to_string(query_time) + "\n";
+    writer.append_result(time_result);
 }
 
-void ProjectOne::runPerfectHashingExperiment(const CSVWriter &writer, const CSVWriter &rehashesWriter, std::vector<uint64_t> &list, const uint8_t &w, const uint32_t &m)
+void ProjectOne::run_perfect_hashing_experiment(const CSVWriter &writer, const CSVWriter &rehashes_writer, std::vector<uint64_t> &list, const uint8_t &w, const uint32_t &m)
 {
     // build time
-    std::chrono::time_point<std::chrono::steady_clock> start = std::chrono::high_resolution_clock::now();
+    auto start = std::chrono::high_resolution_clock::now();
     PerfectHashing perfect_hashing = PerfectHashing(list, w);
-    std::chrono::time_point<std::chrono::steady_clock> end = std::chrono::high_resolution_clock::now();
-    auto buildTime = std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
+    auto end = std::chrono::high_resolution_clock::now();
+    auto build_time = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
 
     // query time
     start = std::chrono::high_resolution_clock::now();
@@ -93,11 +93,11 @@ void ProjectOne::runPerfectHashingExperiment(const CSVWriter &writer, const CSVW
         perfect_hashing.query(list.at(i));
     }
     end = std::chrono::high_resolution_clock::now();
-    auto queryTime = std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
+    auto query_time = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
 
     // results
-    std::string timeResult = "PerfectHashing" "," + std::to_string(m) + "," + std::to_string(buildTime) + "," + std::to_string(queryTime) + "\n";
-    std::string rehashResult = std::to_string(m) + "," + std::to_string(perfect_hashing.get_rehashes()) + "," + std::to_string(perfect_hashing.get_secondary_rehashes()) + "\n";
-    writer.appendResult(timeResult);
-    rehashesWriter.appendResult(rehashResult);
+    std::string time_result = "PerfectHashing" "," + std::to_string(m) + "," + std::to_string(build_time) + "," + std::to_string(query_time) + "\n";
+    std::string rehash_result = std::to_string(m) + "," + std::to_string(perfect_hashing.get_rehashes()) + "," + std::to_string(perfect_hashing.get_secondary_rehashes()) + "\n";
+    writer.append_result(time_result);
+    rehashes_writer.append_result(rehash_result);
 }

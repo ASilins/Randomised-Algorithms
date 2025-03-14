@@ -4,11 +4,9 @@
 
 #include "../utils/NumberUtils.h"
 
-MultiplyModPrimeHash::MultiplyModPrimeHash() : m(0), a(0), b(0), prime(0) {}
+MultiplyModPrimeHash::MultiplyModPrimeHash() : m(0), a(0), b(0) {}
 
 MultiplyModPrimeHash::MultiplyModPrimeHash(uint32_t m) : m(m) {
-    // Mersenne's prime
-    prime = (1ULL << 61) - 1;
     a = NumberUtils::generate_random_uint(prime-1);
     b = NumberUtils::generate_random_uint(prime-1);
 }
@@ -20,4 +18,9 @@ uint32_t MultiplyModPrimeHash::hash(uint64_t x) const {
     return static_cast<uint32_t>(result % m);
 }
 
+void MultiplyModPrimeHash::scramble(uint32_t m) {
+    this->m = m;
+    a = NumberUtils::generate_random_uint(prime-1);
+    b = NumberUtils::generate_random_uint(prime-1);
+}
 

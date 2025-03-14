@@ -5,6 +5,6 @@ using namespace std;
 
 int main()
 {
-    ProjectOne::runExperiments();
+    ProjectOne::run_experiments();
     return 0;
 }

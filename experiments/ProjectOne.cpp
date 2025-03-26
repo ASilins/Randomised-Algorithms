@@ -6,9 +6,9 @@
 #include "../hashing/PerfectHashing.h"
 
 void ProjectOne::run_experiments() {
-    CSVWriter time_writer("../analysis/results.csv", "algorithm,n,build,query");
-    CSVWriter linked_list_writer("../analysis/linked_list.csv", "n,count");
-    CSVWriter rehashes_writer("../analysis/rehashes.csv", "n,hashes,secondary_rehashes");
+    CSVWriter time_writer("../analysis/ProjectOne/results.csv", "algorithm,n,build,query");
+    CSVWriter linked_list_writer("../analysis/ProjectOne/linked_list.csv", "n,count");
+    CSVWriter rehashes_writer("../analysis/ProjectOne/rehashes.csv", "n,hashes,secondary_rehashes");
 
     std::cout << "Starting experiment one!" << std::endl;
     auto start = std::chrono::high_resolution_clock::now();

@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-#include "../utils/NumberUtils.h"
+#include "../../utils/NumberUtils.h"
 
 MultiplyModPrimeHash::MultiplyModPrimeHash() : m(0), a(0), b(0) {}
 

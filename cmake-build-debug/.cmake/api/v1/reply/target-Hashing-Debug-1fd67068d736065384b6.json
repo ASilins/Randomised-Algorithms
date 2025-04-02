@@ -55,7 +55,9 @@
 				4,
 				6,
 				8,
-				10
+				10,
+				12,
+				14
 			]
 		}
 	],
@@ -78,7 +80,9 @@
 				4,
 				6,
 				8,
-				10
+				10,
+				12,
+				14
 			]
 		},
 		{
@@ -90,7 +94,9 @@
 				5,
 				7,
 				9,
-				11
+				11,
+				13,
+				15
 			]
 		}
 	],
@@ -99,67 +105,89 @@
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "hashing/MultiplyShiftHash.cpp",
+			"path" : "hashing/hash_functions/MultiplyShiftHash.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 1,
-			"path" : "hashing/MultiplyShiftHash.h",
+			"path" : "hashing/hash_functions/MultiplyShiftHash.h",
 			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "hashing/HashingWithChaining.cpp",
+			"path" : "hashing/hashing_with_chaining/HashingWithChaining.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 1,
-			"path" : "hashing/HashingWithChaining.h",
+			"path" : "hashing/hashing_with_chaining/HashingWithChaining.h",
 			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "hashing/RedBlackSearchTree.cpp",
+			"path" : "hashing/red_black_tree/RedBlackSearchTree.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 1,
-			"path" : "hashing/RedBlackSearchTree.h",
+			"path" : "hashing/red_black_tree/RedBlackSearchTree.h",
 			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "hashing/PerfectHashing.cpp",
+			"path" : "hashing/perfect_hashing/PerfectHashing.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 1,
-			"path" : "hashing/PerfectHashing.h",
+			"path" : "hashing/perfect_hashing/PerfectHashing.h",
 			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "hashing/SecondaryArray.cpp",
+			"path" : "hashing/perfect_hashing/SecondaryArray.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 1,
-			"path" : "hashing/SecondaryArray.h",
+			"path" : "hashing/perfect_hashing/SecondaryArray.h",
 			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "hashing/MultiplyModPrimeHash.cpp",
+			"path" : "hashing/hash_functions/MultiplyModPrimeHash.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 1,
-			"path" : "hashing/MultiplyModPrimeHash.h",
+			"path" : "hashing/hash_functions/MultiplyModPrimeHash.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "hashing/hash_functions/FourWiseIndependentHash.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "hashing/hash_functions/FourWiseIndependentHash.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "hashing/hashing_with_chaining/KeyValueHashingWithChaining.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "hashing/hashing_with_chaining/KeyValueHashingWithChaining.h",
 			"sourceGroupIndex" : 1
 		}
 	],

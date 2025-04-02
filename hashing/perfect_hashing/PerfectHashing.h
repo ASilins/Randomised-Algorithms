@@ -1,6 +1,6 @@
 #ifndef PERFECTHASHING_H
 #define PERFECTHASHING_H
-#include "MultiplyShiftHash.h"
+#include "../hash_functions/MultiplyShiftHash.h"
 #include "SecondaryArray.h"
 
 

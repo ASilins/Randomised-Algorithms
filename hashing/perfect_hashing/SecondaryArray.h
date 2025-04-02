@@ -2,8 +2,7 @@
 #define SECONDARYARRAY_H
 #include <vector>
 
-
-#include "MultiplyModPrimeHash.h"
+#include "../hash_functions/MultiplyModPrimeHash.h"
 
 class SecondaryArray {
 public:

@@ -1,9 +1,12 @@
 #include "ProjectOne.h"
 #include <chrono>
+#include <iostream>
 
-#include "../hashing/HashingWithChaining.h"
-#include "../hashing/RedBlackSearchTree.h"
-#include "../hashing/PerfectHashing.h"
+#include "../hashing/hashing_with_chaining/HashingWithChaining.h"
+#include "../hashing/perfect_hashing/PerfectHashing.h"
+#include "../hashing/red_black_tree/RedBlackSearchTree.h"
+#include "../utils/NumberUtils.h"
+
 
 void ProjectOne::run_experiments() {
     CSVWriter time_writer("../analysis/ProjectOne/results.csv", "algorithm,n,build,query");

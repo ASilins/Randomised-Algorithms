@@ -2,7 +2,8 @@
 #define HASHINGWITHCHAINING_H
 
 #include <iostream>
-#include "MultiplyShiftHash.h"
+
+#include "../hash_functions/MultiplyShiftHash.h"
 
 class HashingWithChaining {
 public:

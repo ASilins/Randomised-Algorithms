@@ -1,7 +1,7 @@
 #ifndef HASHFUNCTION_H
 #define HASHFUNCTION_H
 #include <iostream>
-#include "../utils/NumberUtils.h"
+#include "../../utils/NumberUtils.h"
 
 class MultiplyShiftHash {
 public:

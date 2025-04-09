@@ -23,6 +23,8 @@ add_library(Hashing hashing/hash_functions/MultiplyShiftHash.cpp
         hashing/hash_functions/FourWiseIndependentHash.h
         hashing/hashing_with_chaining/KeyValueHashingWithChaining.cpp
         hashing/hashing_with_chaining/KeyValueHashingWithChaining.h)
-add_library(Experiments experiments/ProjectOne.cpp experiments/ProjectOne.h)
+add_library(Experiments experiments/ProjectOne.cpp experiments/ProjectOne.h
+        experiments/ProjectTwo.cpp
+        experiments/ProjectTwo.h)
 
 target_link_libraries(Randomised_Algorithms Utils Hashing Experiments)

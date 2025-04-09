@@ -2,9 +2,9 @@
 #define FOURWISEINDEPENDENTHASH_H
 #include <iostream>
 
-class FourwiseIndependentHash {
+class FourWiseIndependentHash {
 public:
-    FourwiseIndependentHash(uint32_t r);
+    FourWiseIndependentHash(uint32_t r);
     std::tuple<uint32_t, uint32_t> hash(uint64_t x) const;
 private:
     uint64_t a, b, c, d;

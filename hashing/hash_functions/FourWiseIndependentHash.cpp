@@ -1,7 +1,7 @@
-#include "FourwiseIndependentHash.h"
+#include "FourWiseIndependentHash.h"
 #include "../../utils/NumberUtils.h"
 
-FourwiseIndependentHash::FourwiseIndependentHash(uint32_t r) : r(r)
+FourWiseIndependentHash::FourWiseIndependentHash(uint32_t r) : r(r)
 {
     a = NumberUtils::generate_random_uint(p-1);
     b = NumberUtils::generate_random_uint(p-1);
@@ -9,7 +9,7 @@ FourwiseIndependentHash::FourwiseIndependentHash(uint32_t r) : r(r)
     d = NumberUtils::generate_random_uint(p-1);
 }
 
-std::tuple<uint32_t, uint32_t> FourwiseIndependentHash::hash(uint64_t x) const
+std::tuple<uint32_t, uint32_t> FourWiseIndependentHash::hash(uint64_t x) const
 {
     uint32_t k = (a*x+b) % p;
     k = (k*x+c) % p;

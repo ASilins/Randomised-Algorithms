@@ -47,7 +47,7 @@ cmake_ninja_workdir = /Users/asilins/Documents/School/AU/Randomised$ Algorithms/
 #############################################
 # Order-only phony target for Randomised_Algorithms
 
-build cmake_object_order_depends_target_Randomised_Algorithms: phony || cmake_object_order_depends_target_Experiments cmake_object_order_depends_target_Hashing cmake_object_order_depends_target_Utils
+build cmake_object_order_depends_target_Randomised_Algorithms: phony || cmake_object_order_depends_target_Experiments cmake_object_order_depends_target_Hashing cmake_object_order_depends_target_Sketch cmake_object_order_depends_target_Utils
 
 build CMakeFiles/Randomised_Algorithms.dir/main.cpp.o: CXX_COMPILER__Randomised_Algorithms_unscanned_Debug /Users/asilins/Documents/School/AU/Randomised$ Algorithms/Randomised-Algorithms/main.cpp || cmake_object_order_depends_target_Randomised_Algorithms
   DEP_FILE = CMakeFiles/Randomised_Algorithms.dir/main.cpp.o.d
@@ -63,9 +63,9 @@ build CMakeFiles/Randomised_Algorithms.dir/main.cpp.o: CXX_COMPILER__Randomised_
 #############################################
 # Link the executable Randomised_Algorithms
 
-build Randomised_Algorithms: CXX_EXECUTABLE_LINKER__Randomised_Algorithms_Debug CMakeFiles/Randomised_Algorithms.dir/main.cpp.o | libUtils.a libHashing.a libExperiments.a || libExperiments.a libHashing.a libUtils.a
+build Randomised_Algorithms: CXX_EXECUTABLE_LINKER__Randomised_Algorithms_Debug CMakeFiles/Randomised_Algorithms.dir/main.cpp.o | libUtils.a libHashing.a libExperiments.a libSketch.a || libExperiments.a libHashing.a libSketch.a libUtils.a
   FLAGS = -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk -mmacosx-version-min=15.0
-  LINK_LIBRARIES = libUtils.a  libHashing.a  libExperiments.a
+  LINK_LIBRARIES = libUtils.a  libHashing.a  libExperiments.a  libSketch.a
   OBJECT_DIR = CMakeFiles/Randomised_Algorithms.dir
   POST_BUILD = :
   PRE_LINK = :
@@ -87,12 +87,6 @@ build CMakeFiles/Utils.dir/utils/NumberUtils.cpp.o: CXX_COMPILER__Utils_unscanne
   OBJECT_DIR = CMakeFiles/Utils.dir
   OBJECT_FILE_DIR = CMakeFiles/Utils.dir/utils
 
-build CMakeFiles/Utils.dir/utils/CSVWriter.cpp.o: CXX_COMPILER__Utils_unscanned_Debug /Users/asilins/Documents/School/AU/Randomised$ Algorithms/Randomised-Algorithms/utils/CSVWriter.cpp || cmake_object_order_depends_target_Utils
-  DEP_FILE = CMakeFiles/Utils.dir/utils/CSVWriter.cpp.o.d
-  FLAGS = -g -std=gnu++2b -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk -mmacosx-version-min=15.0 -fcolor-diagnostics
-  OBJECT_DIR = CMakeFiles/Utils.dir
-  OBJECT_FILE_DIR = CMakeFiles/Utils.dir/utils
-
 
 # =============================================================================
 # Link build statements for STATIC_LIBRARY target Utils
@@ -101,7 +95,7 @@ build CMakeFiles/Utils.dir/utils/CSVWriter.cpp.o: CXX_COMPILER__Utils_unscanned_
 #############################################
 # Link the static library libUtils.a
 
-build libUtils.a: CXX_STATIC_LIBRARY_LINKER__Utils_Debug CMakeFiles/Utils.dir/utils/NumberUtils.cpp.o CMakeFiles/Utils.dir/utils/CSVWriter.cpp.o
+build libUtils.a: CXX_STATIC_LIBRARY_LINKER__Utils_Debug CMakeFiles/Utils.dir/utils/NumberUtils.cpp.o
   ARCH_FLAGS = -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk -mmacosx-version-min=15.0
   LANGUAGE_COMPILE_FLAGS = -g
   OBJECT_DIR = CMakeFiles/Utils.dir
@@ -205,6 +199,12 @@ build CMakeFiles/Experiments.dir/experiments/ProjectTwo.cpp.o: CXX_COMPILER__Exp
   OBJECT_DIR = CMakeFiles/Experiments.dir
   OBJECT_FILE_DIR = CMakeFiles/Experiments.dir/experiments
 
+build CMakeFiles/Experiments.dir/sketch/Sketch.cpp.o: CXX_COMPILER__Experiments_unscanned_Debug /Users/asilins/Documents/School/AU/Randomised$ Algorithms/Randomised-Algorithms/sketch/Sketch.cpp || cmake_object_order_depends_target_Experiments
+  DEP_FILE = CMakeFiles/Experiments.dir/sketch/Sketch.cpp.o.d
+  FLAGS = -g -std=gnu++2b -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk -mmacosx-version-min=15.0 -fcolor-diagnostics
+  OBJECT_DIR = CMakeFiles/Experiments.dir
+  OBJECT_FILE_DIR = CMakeFiles/Experiments.dir/sketch
+
 
 # =============================================================================
 # Link build statements for STATIC_LIBRARY target Experiments
@@ -213,7 +213,7 @@ build CMakeFiles/Experiments.dir/experiments/ProjectTwo.cpp.o: CXX_COMPILER__Exp
 #############################################
 # Link the static library libExperiments.a
 
-build libExperiments.a: CXX_STATIC_LIBRARY_LINKER__Experiments_Debug CMakeFiles/Experiments.dir/experiments/ProjectOne.cpp.o CMakeFiles/Experiments.dir/experiments/ProjectTwo.cpp.o
+build libExperiments.a: CXX_STATIC_LIBRARY_LINKER__Experiments_Debug CMakeFiles/Experiments.dir/experiments/ProjectOne.cpp.o CMakeFiles/Experiments.dir/experiments/ProjectTwo.cpp.o CMakeFiles/Experiments.dir/sketch/Sketch.cpp.o
   ARCH_FLAGS = -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk -mmacosx-version-min=15.0
   LANGUAGE_COMPILE_FLAGS = -g
   OBJECT_DIR = CMakeFiles/Experiments.dir
@@ -221,6 +221,38 @@ build libExperiments.a: CXX_STATIC_LIBRARY_LINKER__Experiments_Debug CMakeFiles/
   PRE_LINK = :
   TARGET_FILE = libExperiments.a
   TARGET_PDB = Experiments.a.dbg
+
+# =============================================================================
+# Object build statements for STATIC_LIBRARY target Sketch
+
+
+#############################################
+# Order-only phony target for Sketch
+
+build cmake_object_order_depends_target_Sketch: phony || .
+
+build CMakeFiles/Sketch.dir/sketch/Sketch.cpp.o: CXX_COMPILER__Sketch_unscanned_Debug /Users/asilins/Documents/School/AU/Randomised$ Algorithms/Randomised-Algorithms/sketch/Sketch.cpp || cmake_object_order_depends_target_Sketch
+  DEP_FILE = CMakeFiles/Sketch.dir/sketch/Sketch.cpp.o.d
+  FLAGS = -g -std=gnu++2b -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk -mmacosx-version-min=15.0 -fcolor-diagnostics
+  OBJECT_DIR = CMakeFiles/Sketch.dir
+  OBJECT_FILE_DIR = CMakeFiles/Sketch.dir/sketch
+
+
+# =============================================================================
+# Link build statements for STATIC_LIBRARY target Sketch
+
+
+#############################################
+# Link the static library libSketch.a
+
+build libSketch.a: CXX_STATIC_LIBRARY_LINKER__Sketch_Debug CMakeFiles/Sketch.dir/sketch/Sketch.cpp.o
+  ARCH_FLAGS = -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk -mmacosx-version-min=15.0
+  LANGUAGE_COMPILE_FLAGS = -g
+  OBJECT_DIR = CMakeFiles/Sketch.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = libSketch.a
+  TARGET_PDB = Sketch.a.dbg
 
 
 #############################################
@@ -252,6 +284,8 @@ build Experiments: phony libExperiments.a
 
 build Hashing: phony libHashing.a
 
+build Sketch: phony libSketch.a
+
 build Utils: phony libUtils.a
 
 # =============================================================================
@@ -262,7 +296,7 @@ build Utils: phony libUtils.a
 #############################################
 # Folder: /Users/asilins/Documents/School/AU/Randomised Algorithms/Randomised-Algorithms/cmake-build-debug
 
-build all: phony Randomised_Algorithms libUtils.a libHashing.a libExperiments.a
+build all: phony Randomised_Algorithms libUtils.a libHashing.a libExperiments.a libSketch.a
 
 # =============================================================================
 # Built-in targets

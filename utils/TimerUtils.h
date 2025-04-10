@@ -35,7 +35,7 @@ namespace TimerUtils {
      */
     template<typename return_value, typename Func, typename... Args>
     std::tuple<uint64_t, return_value> time_experiment_with_result(const std::string& message, Func&& func, Args&&... args) {
-        std::cout << message << std::endl;
+        std::cout << message + "\n";
         return time_experiment_with_result<return_value>(std::forward<Func>(func), std::forward<Args>(args)...);
     }
 
@@ -65,7 +65,7 @@ namespace TimerUtils {
      */
     template <typename Func, typename... Args>
     uint64_t time_experiment(const std::string& message, Func&& func, Args&&... args) {
-        std::cout << message << std::endl;
+        std::cout << message + "\n";
         return time_experiment(std::forward<Func>(func), std::forward<Args>(args)...);
     }
 
@@ -78,11 +78,11 @@ namespace TimerUtils {
      */
     template <typename Func, typename... Args>
     void time_experiment_with_print(const std::string& message, Func&& func, Args&&... args) {
-        std::cout << message << std::endl;
+        std::cout << message + "\n";
 
         auto time = time_experiment(std::forward<Func>(func), std::forward<Args>(args)...);
 
-        std::cout << "It took: " << time << " microseconds" << std::endl;
+        std::cout << message << " took: " << time << " microseconds" << std::endl;
     }
 }
 

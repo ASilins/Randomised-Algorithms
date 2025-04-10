@@ -9,7 +9,7 @@
 class KeyValueHashingWithChaining {
 public:
     explicit KeyValueHashingWithChaining(uint32_t m, uint8_t w);
-    void update(std::tuple<std::uint32_t, std::uint32_t> key_value);
+    void update(const std::tuple<std::uint32_t, std::uint32_t> &key_value);
     uint64_t query() const;
 
 private:

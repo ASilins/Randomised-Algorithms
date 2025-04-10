@@ -7,7 +7,7 @@
 class Sketch {
 public:
     explicit Sketch(uint8_t r);
-    void update(uint64_t i, uint64_t delta);
+    void update(const uint64_t &i, const uint64_t &delta);
     uint64_t query() const;
 private:
     std::vector<uint64_t> table;

@@ -5,7 +5,7 @@
 class FourWiseIndependentHash {
 public:
     FourWiseIndependentHash(uint32_t r);
-    std::tuple<uint32_t, uint32_t> hash(uint64_t x) const;
+    std::tuple<uint32_t, int32_t> hash(const uint64_t &x) const;
 private:
     uint64_t a, b, c, d;
     uint32_t r;

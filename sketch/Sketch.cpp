@@ -15,7 +15,7 @@ Sketch::Sketch(const uint8_t r) : h(FourWiseIndependentHash(r)), r(r) {
  * @param i The index to update
  * @param delta The delta value for the update
  */
-void Sketch::update(const uint64_t i, const uint64_t delta) {
+void Sketch::update(const uint64_t &i, const uint64_t &delta) {
     auto [h_i, g_i] = h.hash(i);
     table[h_i] += g_i * delta;
 }

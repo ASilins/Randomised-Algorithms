@@ -1,11 +1,11 @@
 #include "KeyValueHashingWithChaining.h"
 
-KeyValueHashingWithChaining::KeyValueHashingWithChaining(uint32_t m, uint8_t w) : h(MultiplyShiftHash(w))
+KeyValueHashingWithChaining::KeyValueHashingWithChaining(const uint32_t m, const uint8_t w) : h(MultiplyShiftHash(w))
 {
     table.resize(m);
 }
 
-void KeyValueHashingWithChaining::update(std::tuple<std::uint32_t, std::uint32_t> key_value) {
+void KeyValueHashingWithChaining::update(const std::tuple<std::uint32_t, std::uint32_t> &key_value) {
     const uint32_t index = h.hash(static_cast<uint64_t>(std::get<0>(key_value)));
     auto &chain = table[index];
     for (auto & entry : chain) {

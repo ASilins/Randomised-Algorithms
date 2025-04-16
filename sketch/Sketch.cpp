@@ -5,8 +5,9 @@
  *
  * @param r The unsigned 8-bit integer that is used for hash function and to determine the size of the table by 2^r
  */
-Sketch::Sketch(const uint8_t r) : h(FourWiseIndependentHash(r)), r(r) {
-    table.resize(1ULL << r);
+Sketch::Sketch(const uint32_t r, bool use_multiply_shift) : h(FourWiseIndependentHash(r)), 
+use_multiply_shift(use_multiply_shift), h_two_wise(TwoWiseMultiplyShiftHash(r)), r(r) {
+    table.resize(r);
 }
 
 /**
@@ -16,7 +17,13 @@ Sketch::Sketch(const uint8_t r) : h(FourWiseIndependentHash(r)), r(r) {
  * @param delta The delta value for the update
  */
 void Sketch::update(const uint64_t &i, const uint64_t &delta) {
-    auto [h_i, g_i] = h.hash(i);
+    uint32_t h_i;
+    int32_t g_i;
+    if (use_multiply_shift) {
+        std::tie(h_i, g_i) = h_two_wise.hash(i);
+    } else {
+        std::tie(h_i, g_i) = h.hash(i);
+    }
     table[h_i] += g_i * delta;
 }
 

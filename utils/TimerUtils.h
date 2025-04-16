@@ -3,6 +3,7 @@
 #include <chrono>
 #include <iostream>
 #include <string>
+#include <functional>
 
 namespace TimerUtils {
 

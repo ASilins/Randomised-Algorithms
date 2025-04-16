@@ -3,16 +3,19 @@
 #include <cstdint>
 
 #include "../hashing/hash_functions/FourWiseIndependentHash.h"
+#include "../hashing/hash_functions/TwoWiseMultiplyShiftHash.h"
 
 class Sketch {
 public:
-    explicit Sketch(uint8_t r);
+    explicit Sketch(uint32_t r, bool use_multiply_shift = false);
     void update(const uint64_t &i, const uint64_t &delta);
     uint64_t query() const;
 private:
-    std::vector<uint64_t> table;
+    uint32_t r;
+    bool use_multiply_shift;
     FourWiseIndependentHash h;
-    uint8_t r;
+    TwoWiseMultiplyShiftHash h_two_wise;
+    std::vector<uint64_t> table;
 };
 
 #endif //SKETCH_H

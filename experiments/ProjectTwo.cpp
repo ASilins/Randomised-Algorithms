@@ -23,20 +23,20 @@ void ProjectTwo::run_experiments() {
     std::thread ex9_thread([]() {
         TimerUtils::time_experiment_with_print("Running experiment: 9", run_exercise_9);
     });
-    std::thread ex12_thread([]() {
-        TimerUtils::time_experiment_with_print("Running experiment: 12", run_exercise_12);
-    });
+    // std::thread ex12_thread([]() {
+    //     TimerUtils::time_experiment_with_print("Running experiment: 12", run_exercise_12);
+    // });
 
     ex5_thread.join();
     ex7_thread.join();
     ex8_thread.join();
     ex9_thread.join();
-    ex12_thread.join();
+    // ex12_thread.join();
 }
 
 void ProjectTwo::run_exercise_5() {
-    CSVWriter multiply_shift_writer("../analysis/ProjectTwo/ex5_multiply_shift.csv", "n,time");
-    CSVWriter four_wise_writer("../analysis/ProjectTwo/ex5_four_wise.csv", "n,time");
+    CSVWriter multiply_shift_writer("./analysis/ProjectTwo/ex5_multiply_shift.csv", "n,time");
+    CSVWriter four_wise_writer("./analysis/ProjectTwo/ex5_four_wise.csv", "n,time");
 
     // Setup hash function. We still use the fact that we shift the bits, but we use numbers in range [0, 10^6-1]
     constexpr uint8_t w = 20;
@@ -45,25 +45,23 @@ void ProjectTwo::run_exercise_5() {
     auto list_of_numbers = NumberUtils::generate_list(0, 1e6 - 1);
 
     std::thread multiply_shift_thread([list_of_numbers, &multiply_shift_hash, &multiply_shift_writer]() {
-        for (int i = 0; i < 1e6; ++i) {
+        for (int i = 0; i < 1; ++i) {
             const auto multiply_shift_time = TimerUtils::time_experiment([&list_of_numbers, &multiply_shift_hash]() {
                 for (const auto &number: list_of_numbers) {
                     (void)multiply_shift_hash.hash(number);
                 }
             });
-
             multiply_shift_writer.append_row(std::to_string(i), std::to_string(multiply_shift_time));
         }
     });
 
     std::thread four_wise_thread([list_of_numbers, &four_wise_hash, &four_wise_writer]() {
-        for (uint64_t i = 0; i < 1e6; ++i) {
+        for (uint64_t i = 0; i < 1; ++i) {
             const auto four_wise_time = TimerUtils::time_experiment([&list_of_numbers, &four_wise_hash]() {
                 for (const auto &number: list_of_numbers) {
                     (void)four_wise_hash.hash(number);
                 }
             });
-
             four_wise_writer.append_row(std::to_string(i), std::to_string(four_wise_time));
         }
     });
@@ -77,18 +75,18 @@ void ProjectTwo::run_exercise_7() {
     //  Make 10^9 updates. One experiment for each n in the form of n = 2^N with N = 6, 7, ..., 28.
     //  The i'th update should be ((i mod n), 1). The sketch should have array of 2^7, 2^10, 2^20.
 
-    CSVWriter hashing_with_chaining_writer("../analysis/ProjectTwo/ex7_hashing_with_chaining.csv", "n,time");
-    CSVWriter sketch_7_writer("../analysis/ProjectTwo/ex7_sketch_7.csv", "n,time");
-    CSVWriter sketch_10_writer("../analysis/ProjectTwo/ex7_sketch_10.csv", "n,time");
-    CSVWriter sketch_20_writer("../analysis/ProjectTwo/ex7_sketch_20.csv", "n,time");
+    CSVWriter hashing_with_chaining_writer("./analysis/ProjectTwo/ex7_hashing_with_chaining.csv", "n,time");
+    CSVWriter sketch_7_writer("./analysis/ProjectTwo/ex7_sketch_7.csv", "n,time");
+    CSVWriter sketch_10_writer("./analysis/ProjectTwo/ex7_sketch_10.csv", "n,time");
+    CSVWriter sketch_20_writer("./analysis/ProjectTwo/ex7_sketch_20.csv", "n,time");
 
-    for (int N = 6; N <= 28; ++N) {
+    for (int N = 26; N <= 28; ++N) {
         // 2^N
         const uint64_t n = 1ULL << N;
         auto multiply_shift_table = KeyValueHashingWithChaining(n, N);
-        auto sketch_7 = Sketch(7);
-        auto sketch_10 = Sketch(10);
-        auto sketch_20 = Sketch(20);
+        auto sketch_7 = Sketch(1ULL << 7);
+        auto sketch_10 = Sketch(1ULL << 10);
+        auto sketch_20 = Sketch(1ULL << 20);
 
         std::thread key_value_thread([&hashing_with_chaining_writer, &multiply_shift_table, &n]() {
             key_value_experiment(hashing_with_chaining_writer, multiply_shift_table, n);
@@ -136,12 +134,65 @@ void ProjectTwo::sketch_experiment(const CSVWriter &writer, Sketch &sketch, cons
 void ProjectTwo::run_exercise_8() {
     // TODO:
     //  Make 10^3 updates. The i'th update is (i,i^2). Measure relative error and plot it as a function of r
-    //  r = 2^3, 2^4, .., 2^10. Run 100 times for each r.
+    // Then repeat but instead run 10,000 times and compute maximum relative error.
+    CSVWriter relative_error_4wise("./analysis/ProjectTwo/ex8_relative_error_4wise.csv", "r,error");
+    
+    uint64_t f_squared_real = 0;
+    for (uint64_t i = 1; i <= 1000; ++i) {
+        f_squared_real += (i*i)*(i*i); // i^4
+    }
+
+    for (int R = 3; R<10; ++R) {
+        //  r = 2^3, 2^4, .., 2^10. Run 100 times for each r and use average
+        const uint32_t r = 1ULL << R;
+
+        for (int j = 0; j<100; ++j) {
+            
+            auto sketch_r = Sketch(r);
+            //Make 10^3 updates, i'th update is (i, i^2)
+            for (int i = 1; i<1000; ++i) {
+                const uint64_t i_th_update = i*i;
+                sketch_r.update(i, i_th_update);
+            }
+            uint64_t f_hat = sketch_r.query();
+            double relative_error = std::abs(static_cast<int64_t>(f_hat) - static_cast<int64_t>(f_squared_real)) / static_cast<double>(f_squared_real);
+            relative_error_4wise.append_row(std::to_string(r), std::to_string(relative_error));
+        }
+
+
+    }
+
 }
 
 void ProjectTwo::run_exercise_9() {
     // TODO:
     //  Repeat exercise 8 but with different hash functions. k = (a*x + b) >> 33
+
+    CSVWriter relative_error_2wise("./analysis/ProjectTwo/ex9_relative_error_2wise.csv", "r,error");
+    
+    uint64_t f_squared_real = 0;
+    for (uint64_t i = 1; i <= 1000; ++i) {
+        f_squared_real += (i*i)*(i*i); // i^4
+    }
+
+    for (int R = 3; R<10; ++R) {
+        //  r = 2^3, 2^4, .., 2^10. Run 100 times for each r and use average
+        const uint32_t r = 1ULL << R;
+
+        for (int j = 0; j<100; ++j) {
+            
+            auto sketch_r = Sketch(r, true);
+            //Make 10^3 updates, i'th update is (i, i^2)
+            for (int i = 1; i<1000; ++i) {
+                const uint64_t i_th_update = i*i;
+                sketch_r.update(i, i_th_update);
+            }
+            uint64_t f_hat = sketch_r.query();
+            double relative_error = std::abs(static_cast<int64_t>(f_hat) - static_cast<int64_t>(f_squared_real)) / static_cast<double>(f_squared_real);
+            relative_error_2wise.append_row(std::to_string(r), std::to_string(relative_error));
+        }
+
+    }
 }
 
 void ProjectTwo::run_exercise_12() {

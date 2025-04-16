@@ -14,9 +14,9 @@ void ProjectTwo::run_experiments() {
     std::thread ex5_thread([]() {
         TimerUtils::time_experiment_with_print("Running experiment: 5", run_exercise_5);
     });
-    std::thread ex7_thread([]() {
-        TimerUtils::time_experiment_with_print("Running experiment: 7", run_exercise_7);
-    });
+    // std::thread ex7_thread([]() {
+    //     TimerUtils::time_experiment_with_print("Running experiment: 7", run_exercise_7);
+    // });
     std::thread ex8_thread([]() {
         TimerUtils::time_experiment_with_print("Running experiment: 8", run_exercise_8);
     });
@@ -28,7 +28,7 @@ void ProjectTwo::run_experiments() {
     // });
 
     ex5_thread.join();
-    ex7_thread.join();
+    // ex7_thread.join();
     ex8_thread.join();
     ex9_thread.join();
     // ex12_thread.join();
@@ -142,7 +142,7 @@ void ProjectTwo::run_exercise_8() {
         f_squared_real += (i*i)*(i*i); // i^4
     }
 
-    for (int R = 3; R<10; ++R) {
+    for (int R = 3; R<=10; ++R) {
         //  r = 2^3, 2^4, .., 2^10. Run 100 times for each r and use average
         const uint32_t r = 1ULL << R;
 
@@ -175,7 +175,7 @@ void ProjectTwo::run_exercise_9() {
         f_squared_real += (i*i)*(i*i); // i^4
     }
 
-    for (int R = 3; R<10; ++R) {
+    for (int R = 3; R<=10; ++R) {
         //  r = 2^3, 2^4, .., 2^10. Run 100 times for each r and use average
         const uint32_t r = 1ULL << R;
 

@@ -2,6 +2,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 
+plt.rcParams.update({'font.size': 16})
 
 #Exercise 7
 # Helper function to read and process data
@@ -26,16 +27,14 @@ plt.plot(sketch_1048576['n'], sketch_1048576['avg_time'], label='Sketch r=2^20',
 
 plt.xscale('log', base=2)
 plt.xlabel('n (log scale)')
-plt.ylabel('Average update time (seconds)')
-plt.title('Average Update Time vs n')
+plt.ylabel('Average update time (μs)')
+plt.title('Average Update Time')
 plt.legend()
 plt.grid(True, which='both', linestyle='--', linewidth=0.5)
 plt.tight_layout()
 plt.savefig('ex_7_timings')
 
-
-
-#Exercise 8+9:
+#Exercise 8:
 import pandas as pd
 import matplotlib.pyplot as plt
 
@@ -56,11 +55,11 @@ avg_error_by_r = data.groupby('r')['error'].mean().reset_index()
 plt.figure(figsize=(10, 6))
 plt.xscale('log', base=2)
 plt.plot(avg_error_by_r['r'], avg_error_by_r['error'], marker='o', linestyle='-')
-plt.title('Average Error as a Function of r')
+plt.title('Average Relative Error as Function of r')
 plt.xlabel('r')
-plt.ylabel('Average Error')
+plt.ylabel('Average Relative Error')
 plt.grid(True)
-plt.xticks(avg_error_by_r['r']) 
+plt.xticks(avg_error_by_r['r'], fontsize=18)  # Larger x-axis ticks
 plt.tight_layout()
 plt.savefig('ex_8_avg_error_plot')
 
@@ -71,11 +70,60 @@ max_error_by_r = data.groupby('r')['error'].max().reset_index()
 plt.figure(figsize=(10, 6))
 plt.xscale('log', base=2)
 plt.plot(max_error_by_r['r'], max_error_by_r['error'], marker='o', linestyle='-', color='red')
-plt.title('Maximum Error as a Function of r')
+plt.title('Maximum Relative Error as Function of r')
 plt.xlabel('r')
-plt.ylabel('Maximum Error')
+plt.ylabel('Maximum Relative Error')
+
 plt.grid(True)
-plt.xticks(max_error_by_r['r'])
+plt.xticks(max_error_by_r['r'], fontsize=18)
+plt.tight_layout()
+
+# Save the plot
+plt.savefig('ex_8_max_error_plot.png')
+
+
+#Exercise 9:
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Load data, explicitly setting the separator and skipping the header if needed
+data = pd.read_csv('ex9_relative_error_2wise.csv', sep=',', names=['r', 'error'], skiprows=1)
+
+# Convert r and error to numeric (in case any extra whitespace or parsing issues)
+data['r'] = pd.to_numeric(data['r'], errors='coerce')
+data['error'] = pd.to_numeric(data['error'], errors='coerce')
+
+# Drop any rows with NaN values (could happen if there are malformed lines)
+data = data.dropna()
+
+# Group by r and compute average error
+avg_error_by_r = data.groupby('r')['error'].mean().reset_index()
+
+# Plotting
+plt.figure(figsize=(10, 6))
+plt.xscale('log', base=2)
+plt.plot(avg_error_by_r['r'], avg_error_by_r['error'], marker='o', linestyle='-')
+plt.title('Average Relative Error as Function of r')
+plt.xlabel('r')
+plt.ylabel('Average Relative Error')
+plt.grid(True)
+plt.xticks(avg_error_by_r['r'], fontsize=18)  # Larger x-axis ticks
+plt.tight_layout()
+plt.savefig('ex_9_avg_error_plot')
+
+# Compute maximum error per r
+max_error_by_r = data.groupby('r')['error'].max().reset_index()
+
+# Plot
+plt.figure(figsize=(10, 6))
+plt.xscale('log', base=2)
+plt.plot(max_error_by_r['r'], max_error_by_r['error'], marker='o', linestyle='-', color='red')
+plt.title('Maximum Relative Error as Function of r')
+plt.xlabel('r')
+plt.ylabel('Maximum Relative Error')
+
+plt.grid(True)
+plt.xticks(max_error_by_r['r'], fontsize=18)
 plt.tight_layout()
 
 # Save the plot

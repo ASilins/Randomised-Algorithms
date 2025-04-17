@@ -80,7 +80,7 @@ void ProjectTwo::run_exercise_7() {
     CSVWriter sketch_10_writer("./analysis/ProjectTwo/ex7_sketch_10.csv", "n,time");
     CSVWriter sketch_20_writer("./analysis/ProjectTwo/ex7_sketch_20.csv", "n,time");
 
-    for (int N = 26; N <= 28; ++N) {
+    for (int N = 6; N <= 28; ++N) {
         // 2^N
         const uint64_t n = 1ULL << N;
         auto multiply_shift_table = KeyValueHashingWithChaining(n, N);

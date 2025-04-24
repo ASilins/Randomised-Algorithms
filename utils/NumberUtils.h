@@ -7,10 +7,12 @@
 
 class NumberUtils {
 public:
-  static uint32_t generate_random_uint(uint32_t m);
-  static uint64_t generate_random_uint(uint64_t m);
-  static std::vector<uint64_t> generate_shuffled_list(uint32_t size);
-  static std::vector<uint64_t> generate_list(uint64_t lower_bound, uint64_t upper_bound);
+    static uint32_t generate_random_uint(uint32_t m);
+    static uint64_t generate_random_uint(uint64_t m);
+    static uint64_t generate_random_uint(uint64_t lower, uint64_t upper);
+    static std::vector<uint64_t> generate_shuffled_list(uint32_t size);
+    static std::vector<uint64_t> generate_list(uint64_t lower_bound, uint64_t upper_bound);
+    static bool is_prime(uint64_t n);
 };
 
 #endif //NUMBERUTILS_H

@@ -10,11 +10,7 @@
  * @return Unsigned 32-bit integer in the range [1, m]
  */
 uint32_t NumberUtils::generate_random_uint(const uint32_t m)  {
-    std::random_device rd;
-    std::mt19937 gen(rd());
-    std::uniform_int_distribution<uint32_t> dist(1, m);
-
-    return dist(gen);
+    return static_cast<uint32_t>(generate_random_uint(1, m));
 }
 
 /**
@@ -24,9 +20,13 @@ uint32_t NumberUtils::generate_random_uint(const uint32_t m)  {
  * @return Unsigned 64-bit integer in the range [1, m]
  */
 uint64_t NumberUtils::generate_random_uint(const uint64_t m) {
+    return generate_random_uint(1, m);
+}
+
+uint64_t NumberUtils::generate_random_uint(const uint64_t lower, const uint64_t upper) {
     std::random_device rd;
     std::mt19937 gen(rd());
-    std::uniform_int_distribution<uint64_t> dist(1, m);
+    std::uniform_int_distribution<uint64_t> dist(lower, upper);
 
     return dist(gen);
 }
@@ -67,4 +67,19 @@ std::vector<uint64_t> NumberUtils::generate_list(const uint64_t lower_bound, con
         list[i-lower_bound] = i;
     }
     return list;
+}
+
+bool NumberUtils::is_prime(uint64_t n) {
+    int count = 0;
+
+    for (uint64_t i = 1ULL << 60; i < n; ++i) {
+        if (n % i == 0) {
+            count++;
+        }
+        if (count > 0) {
+            return false;
+        }
+    }
+
+    return true;
 }

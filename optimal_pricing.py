@@ -1,15 +1,11 @@
 import numpy as np
-from sympy import symbols, solve
 import pandas as pd
 from tqdm import tqdm
-
-
 
 def basic_pricing_strategy(k, customer_valuations):
     n = len(customer_valuations)
         
     fixed_price = 1-(k/n)
-    #print(f'Fixed price is: {fixed_price}')
     t = k
     
     total_revenue = 0
@@ -43,64 +39,13 @@ def fill_table(k, n):
             else: #To compute at (i,t) we need (i+1, t) and (i+1, t-1) 
                 expectation_accept = expectation_table[i+1, t-1]
                 expectation_reject = expectation_table[i+1, t]
-                p = symbols('p')
-                expr = -2*p+1+expectation_reject-expectation_accept #Derivative
-                p_optimal = solve(expr)[0]
+                p_optimal = 0.5*(1+expectation_reject-expectation_accept)
                 expected_revenue = p_optimal*(1-p_optimal)+p_optimal*expectation_reject+(1-p_optimal)*expectation_accept
 
                 price_table[i, t] = p_optimal
                 expectation_table[i, t] = expected_revenue
                 
     return price_table
-
-def compute_optimal_price(i, t, n):
-    #Currently at i'th customer and t tickets left. We compute the optimal price
-    # print(f'Compute optimal price called with {i}, {t}, {n}')
-    
-    
-    if(n-i <= t):
-        return 0.5
-    else: 
-        p = symbols('p')
-        expectation_accept = compute_expectation(i+1, t-1, n)
-        expectation_reject = compute_expectation(i+1, t, n)
-        expr = -2*p+1+expectation_reject-expectation_accept #Derivative
-        p_optimal = solve(expr)[0]
-        return p_optimal
-
-def compute_expectation(i, t, n):
-    # print(f'Compute expectation called with: {i}, {t}, {n}')
-    if t <= 0: #No more tickets to sell
-        return 0
-    if (n-i <= t): #Base case, where more tickets than remaining customers
-        return 0.25*t
-    else:
-        p = symbols('p')
-        expectation_accept = compute_expectation(i+1, t-1, n)
-        expectation_reject = compute_expectation(i+1, t, n)
-
-        expr = -2*p+1+expectation_reject-expectation_accept #Derivative
-        p_optimal = solve(expr)[0]
-        expected_revenue = p_optimal*(1-p_optimal)+p_optimal*expectation_reject+(1-p_optimal)*expectation_accept
-        return expected_revenue
- 
-def optimal_pricing_strategy_old(k, customer_valuations): 
-    n = len(customer_valuations)
-    t = k
-    total_revenue = 0
-    
-    for i, valuation in enumerate(customer_valuations):
-        #print(f'At i: {i} and tickets left: {t}')
-        optimal_price = compute_optimal_price(i, t, n)
-        #print(f'Optimal price at {i} is: {optimal_price}')
-        if optimal_price<=valuation:
-            total_revenue += optimal_price
-            t -= 1
-        
-        if t == 0: #All tickets sold
-            break
-    
-    return total_revenue
 
 def optimal_pricing_strategy(k, customer_valuations, price_table):
     n = len(customer_valuations)
